@@ -1,15 +1,8 @@
 import skillsRepository from '../repositories/SkillsRepository';
 import Skill from "../models/Skill";
 
-interface IRequest {
-  id: string;
-  name: string;
-  description: string;
-  level: number;
-}
-
 class UpdateSkillService {
-  public execute({ id, name, description, level }: IRequest): Skill {
+  public execute({ id, name, description, level }: Skill): Skill {
 
     let skill = skillsRepository.listById(id);
 

@@ -1,15 +1,8 @@
-// import { skillsRepository } from '../dtos/ISkillsRepository';
 import skillsRepository from '../repositories/SkillsRepository';
 import Skill from "../models/Skill";
 
-interface IRequest {
-  name: string;
-  description: string;
-  level: number;
-}
-
 class CreateSkillService {
-  public execute({ name, description, level }: IRequest): Skill {
+  public execute({ name, description, level }: Omit<Skill, 'id'>): Skill {
 
     const skill = skillsRepository.create({ name, description, level });
 

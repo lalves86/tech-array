@@ -1,5 +1,4 @@
 import skillsRepository from '../repositories/SkillsRepository';
-import Skill from "../models/Skill";
 
 class UpdateSkillService {
   public execute(id: string): string {

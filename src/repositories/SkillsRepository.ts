@@ -1,13 +1,6 @@
 import { uuid } from "uuidv4";
 import Skill from "../models/Skill";
 
-interface IRequest {
-  id: string;
-  name: string;
-  description: string;
-  level: number;
-}
-
 class SkillsRepository {
   private skillsRepository: Skill[] = [];
 
@@ -23,7 +16,7 @@ class SkillsRepository {
     return skill;
   }
 
-  public create({ name, description, level }: Omit<IRequest, 'id'>): Skill {
+  public create({ name, description, level }: Omit<Skill, 'id'>): Skill {
     const skill = {
       id: uuid(),
       name,
@@ -36,7 +29,7 @@ class SkillsRepository {
     return skill;
   }
 
-  public update({ id, name, description, level }: IRequest): Skill {
+  public update({ id, name, description, level }: Skill): Skill {
     const skill = {
       id,
       name,

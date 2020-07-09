@@ -1,4 +1,3 @@
-// import { skillsRepository } from '../dtos/ISkillsRepository';
 import skillsRepository from '../repositories/SkillsRepository';
 
 class ListSkillByIdService {
