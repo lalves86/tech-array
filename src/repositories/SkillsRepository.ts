@@ -11,19 +11,19 @@ interface IRequest {
 class SkillsRepository {
   private skillsRepository: Skill[] = [];
 
-  public index() {
+  public all() {
     const skills = this.skillsRepository;
 
     return skills;
   }
 
-  public show(id: string): Skill | undefined {
+  public listById(id: string): Skill | undefined {
     const skill = this.skillsRepository.find(skill => skill.id === id);
 
     return skill;
   }
 
-  public create({ name, description, level }: IRequest): Skill {
+  public create({ name, description, level }: Omit<IRequest, 'id'>): Skill {
     const skill = {
       id: uuid(),
       name,
@@ -51,7 +51,7 @@ class SkillsRepository {
     return skill;
   }
 
-  public delete(id: string): void {
+  public remove(id: string): void {
     const skills = this.skillsRepository.filter(skill => skill.id !== id);
 
     this.skillsRepository = [...skills];

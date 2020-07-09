@@ -11,7 +11,7 @@ interface IRequest {
 class UpdateSkillService {
   public execute({ id, name, description, level }: IRequest): Skill {
 
-    let skill = skillsRepository.show(id);
+    let skill = skillsRepository.listById(id);
 
     if (!skill) throw new Error('Skill id not found');
 

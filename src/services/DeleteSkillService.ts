@@ -4,11 +4,11 @@ import Skill from "../models/Skill";
 class UpdateSkillService {
   public execute(id: string): string {
 
-    const skill = skillsRepository.show(id);
+    const skill = skillsRepository.listById(id);
 
     if (!skill) throw new Error(`Skill ${id} not found`);
 
-    skillsRepository.delete(id);
+    skillsRepository.remove(id);
 
     return `Skill ${id} deleted.`;
   }
