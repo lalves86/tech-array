@@ -1,15 +1,15 @@
 import { uuid } from "uuidv4";
+import Skill from "../models/Skill";
 
-import ISkillDTO from '../dtos/ISkillDTO';
-
-interface SkillDTO {
-  name: String;
-  description: String;
-  level: Number;
+interface IRequest {
+  id: string;
+  name: string;
+  description: string;
+  level: number;
 }
 
 class SkillsRepository {
-  private skillsRepository: ISkillDTO[] = [];
+  private skillsRepository: Skill[] = [];
 
   public index() {
     const skills = this.skillsRepository;
@@ -17,7 +17,13 @@ class SkillsRepository {
     return skills;
   }
 
-  public create({ name, description, level }: SkillDTO): ISkillDTO {
+  public show(id: string): Skill | undefined {
+    const skill = this.skillsRepository.find(skill => skill.id === id);
+
+    return skill;
+  }
+
+  public create({ name, description, level }: IRequest): Skill {
     const skill = {
       id: uuid(),
       name,
@@ -29,6 +35,27 @@ class SkillsRepository {
 
     return skill;
   }
+
+  public update({ id, name, description, level }: IRequest): Skill {
+    const skill = {
+      id,
+      name,
+      description,
+      level,
+    }
+
+    const skillIndex = this.skillsRepository.findIndex(skill => skill.id === id);
+
+    this.skillsRepository[skillIndex] = skill;
+
+    return skill;
+  }
+
+  public delete(id: string): void {
+    const skills = this.skillsRepository.filter(skill => skill.id !== id);
+
+    this.skillsRepository = [...skills];
+  }
 }
 
-export default SkillsRepository;
+export default new SkillsRepository();
