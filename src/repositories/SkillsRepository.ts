@@ -16,6 +16,12 @@ class SkillsRepository {
     return skill;
   }
 
+  public findByName(name: string): Skill | undefined {
+    const skill = this.skillsRepository.find(skill => skill.name === name);
+
+    return skill;
+  }
+
   public create({ name, description, level }: Omit<Skill, 'id'>): Skill {
     const skill = {
       id: uuid(),

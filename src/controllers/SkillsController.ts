@@ -31,13 +31,17 @@ class SkillsController {
   }
 
   public create(request: Request, response: Response): Response {
-    const { name, description, level } = request.body;
+    try {
+      const { name, description, level } = request.body;
 
-    const createSkill = new CreateSkillService();
+      const createSkill = new CreateSkillService();
 
-    const skill = createSkill.execute({ name, description, level });
+      const skill = createSkill.execute({ name, description, level });
 
-    return response.json(skill);
+      return response.json(skill);
+    } catch (err) {
+      return response.status(400).json({ error: err.message });
+    }
   }
 
   public update(request: Request, response: Response): Response {
